@@ -45,7 +45,7 @@ void is_binary_tree(char str[]){
             }
         }
         if(i==0 && degree>=2){
-            printf("Output: False");
+            printf("ERROR");
             return;
         }
         if(degree>2){
