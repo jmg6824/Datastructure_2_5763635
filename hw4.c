@@ -76,6 +76,25 @@ void free_tree(TreeNode* root) {
     }
 }
 
+//(탐색용) 이진탐색트리에서 임의의 숫자를 선형 탐색
+void find_num_in_binary_tree(TreeNode* root,int data,int count){
+    if(root->data!=data){count++;}
+    else if(root->data==data){printf("이진탐색트리로 검색한 결과 총 %d회 탐색하였습니다.",count);}
+
+    if(root->left==NULL && root->right==NULL && root->data!=data){return;}
+    else if(root->data>data){find_num_in_binary_tree(root->left,data,count);}
+    else if(root->data<data){find_num_in_binary_tree(root->right,data,count);}
+    
+}
+//(탐색용) 배열에서 임의의 숫자를 탐색
+void find_num_in_array(int str[],int data){
+    int count=1;
+    for(int i=0;i<100;i++){
+        if(str[i]!=data) count++;
+        else if(str[i]==data) {printf("배열을 순회하며 총 %d회 탐색하였습니다.\n",count);return;}
+    }
+    printf("배열에 존재하지 않는 숫자입니다.");
+}
 // main 함수
 int main() {
     #define COUNT 100
@@ -108,20 +127,22 @@ int main() {
         str[i] = random_number;
     }
 
-    printf("생성된 난수 배열 (앞 20개):\n");
-    for(i = 0; i < 20; i++) {
+    printf("생성된 난수 배열 :\n");
+    for(i = 0; i < 100; i++) {
         printf("%d ", str[i]);
     }
-    printf("...\n\n");
+    printf("\n\n");
 
     // make_tree 함수를 사용하여 이진 탐색 트리 생성
     TreeNode* root = make_tree(str, COUNT);
 
-    // 생성된 트리를 중위 순회하여 결과 확인
-    printf("생성된 트리를 중위 순회한 결과 (정렬되어야 함):\n");
-    in_order_traversal(root);
-    printf("\n");
-
+    printf("탐색할 숫자를 입력하시오: ");
+    int data;
+    int count=1;
+    scanf("%d",&data);
+    
+    find_num_in_array(str,data);
+    find_num_in_binary_tree(root,data,count);
     // 할당된 트리 메모리 해제
     free_tree(root);
 
