@@ -1,3 +1,4 @@
+#define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
@@ -5,8 +6,8 @@
 // 1. 이진 탐색 트리 노드 구조체 정의
 typedef struct TreeNode {
     int data;
-    struct TreeNode *left;
-    struct TreeNode *right;
+    struct TreeNode* left;
+    struct TreeNode* right;
 } TreeNode;
 
 // 새로운 노드를 생성하는 보조 함수
@@ -49,12 +50,12 @@ TreeNode* make_tree(int str[], int size) {
     }
 
     TreeNode* root = NULL; // 트리 루트 초기화
-    
+
     // 배열의 모든 원소를 트리에 삽입
     for (int i = 0; i < size; i++) {
         root = insert_node(root, str[i]);
     }
-    
+
     return root;
 }
 
@@ -77,28 +78,28 @@ void free_tree(TreeNode* root) {
 }
 
 //(탐색용) 이진탐색트리에서 임의의 숫자를 선형 탐색
-void find_num_in_binary_tree(TreeNode* root,int data,int count){
-    if(root->data!=data){count++;}
-    else if(root->data==data){printf("이진탐색트리로 검색한 결과 총 %d회 탐색하였습니다.",count);}
+void find_num_in_binary_tree(TreeNode* root, int data, int count) {
+    if (root->data != data) { count++; }
+    else if (root->data == data) { printf("이진탐색트리로 검색한 결과 총 %d회 탐색하였습니다.", count); }
 
-    if(root->left==NULL && root->right==NULL && root->data!=data){return;}
-    else if(root->data>data){find_num_in_binary_tree(root->left,data,count);}
-    else if(root->data<data){find_num_in_binary_tree(root->right,data,count);}
-    
+    if (root->left == NULL && root->right == NULL && root->data != data) { return; }
+    else if (root->data > data) { find_num_in_binary_tree(root->left, data, count); }
+    else if (root->data < data) { find_num_in_binary_tree(root->right, data, count); }
+
 }
 //(탐색용) 배열에서 임의의 숫자를 탐색
-void find_num_in_array(int str[],int data){
-    int count=1;
-    for(int i=0;i<100;i++){
-        if(str[i]!=data) count++;
-        else if(str[i]==data) {printf("배열을 순회하며 총 %d회 탐색하였습니다.\n",count);return;}
+void find_num_in_array(int str[], int data) {
+    int count = 1;
+    for (int i = 0; i < 100; i++) {
+        if (str[i] != data) count++;
+        else if (str[i] == data) { printf("배열을 순회하며 총 %d회 탐색하였습니다.\n", count); return; }
     }
     printf("배열에 존재하지 않는 숫자입니다.");
 }
 // main 함수
 int main() {
-    #define COUNT 100
-    #define MAX_NUM 1000
+#define COUNT 100
+#define MAX_NUM 1000
 
     int str[COUNT];
     int i, j, random_number, is_duplicate;
@@ -128,7 +129,7 @@ int main() {
     }
 
     printf("생성된 난수 배열 :\n");
-    for(i = 0; i < 100; i++) {
+    for (i = 0; i < 100; i++) {
         printf("%d ", str[i]);
     }
     printf("\n\n");
@@ -138,11 +139,11 @@ int main() {
 
     printf("탐색할 숫자를 입력하시오: ");
     int data;
-    int count=1;
-    scanf("%d",&data);
-    
-    find_num_in_array(str,data);
-    find_num_in_binary_tree(root,data,count);
+    int count = 1;
+    scanf("%d", &data);
+
+    find_num_in_array(str, data);
+    find_num_in_binary_tree(root, data, count);
     // 할당된 트리 메모리 해제
     free_tree(root);
 
