@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include "bst_avl.h"
-
+#include "bst_avl.c"
 #define NUM_VALS 1000
 #define MAX_VAL 10001 // 0 to 10000
 #define NUM_SEARCHES 1000
